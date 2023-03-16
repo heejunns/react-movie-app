@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>단위변환 앱</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script> -->
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      function ExchangeRateConverter() {
+        const [inputValue, setinputValue] = React.useState('');
+        const [disabledValue, setDisabled] = React.useState(true);
+
+        const onChange = (event) => setinputValue(event.target.value);
+        const onClickResetButton = () => setinputValue('');
+        const onClickInvertButton = () => {
+          setDisabled((disabledValue) => !disabledValue);
+          onClickResetButton();
+        };
+
+        return (
+          <div>
+            <h1>ExchangeRate Converter! (2023.03.16 기준)</h1>
+            <div>
+              <label htmlFor="won">원 :</label>
+              <input
+                id="won"
+                type="number"
+                placeholder="몇 원인지 입력하시오."
+                value={disabledValue ? inputValue : inputValue * 1313.5}
+                onChange={onChange}
+                disabled={!disabledValue}
+              />
+            </div>
+            <div>
+              <label htmlFor="dollar">달러 :</label>
+              <input
+                value={
+                  disabledValue ? (inputValue / 1313.5).toFixed(2) : inputValue
+                }
+                id="dollar"
+                type="number"
+                placeholder="몇 달러인지를 입력하세요."
+                onChange={onChange}
+                disabled={disabledValue}
+              />
+            </div>
+            <button onClick={onClickResetButton}>Reset</button>
+            <button onClick={onClickInvertButton}>
+              {disabledValue
+                ? '원으로 변환 모드로 변경'
+                : '달러로 변환 모드로 변경'}
+            </button>
+          </div>
+        );
+      }
+
+      function KilloMeterToMileConverter() {
+        const [inputValue, setinputValue] = React.useState('');
+        const [disabledValue, setDisabled] = React.useState(true);
+
+        const onChange = (event) => setinputValue(event.target.value);
+        const onClickResetButton = () => setinputValue('');
+        const onClickInvertButton = () => {
+          setDisabled((disabledValue) => !disabledValue);
+          onClickResetButton();
+        };
+
+        return (
+          <div>
+            <h1>KilloMeterToMiles Converter!</h1>
+            <div>
+              <label htmlFor="killometer">killoMeter :</label>
+              <input
+                id="killometer"
+                type="number"
+                placeholder="KilloMeter 를 입력하시오."
+                value={
+                  disabledValue
+                    ? inputValue
+                    : (inputValue / 0.621371).toFixed(4)
+                }
+                onChange={onChange}
+                disabled={!disabledValue}
+              />
+            </div>
+            <div>
+              <label htmlFor="mile">Mile :</label>
+              <input
+                value={disabledValue ? inputValue * 0.621371 : inputValue}
+                id="mile"
+                type="number"
+                placeholder="Mile 을 입력하세요."
+                onChange={onChange}
+                disabled={disabledValue}
+              />
+            </div>
+            <button onClick={onClickResetButton}>Reset</button>
+            <button onClick={onClickInvertButton}>
+              {disabledValue
+                ? 'KilloMeter로 변환 모드로 변경'
+                : 'Mile로 변환 모드로 변경'}
+            </button>
+          </div>
+        );
+      }
+      function MinutesToHoursConverter() {
+        const [inputValue, setinputValue] = React.useState('');
+        const [disabledValue, setDisabled] = React.useState(true);
+
+        const onChange = (event) => setinputValue(event.target.value);
+        const onClickResetButton = () => setinputValue('');
+        const onClickInvertButton = () => {
+          setDisabled((disabledValue) => !disabledValue);
+          onClickResetButton();
+        };
+
+        return (
+          <div>
+            <h1>MinuteToHour Converter!</h1>
+            <div>
+              <label htmlFor="minute">분 :</label>
+              <input
+                id="minute"
+                type="number"
+                placeholder="Minute"
+                value={disabledValue ? inputValue : inputValue * 60}
+                onChange={onChange}
+                disabled={!disabledValue}
+              />
+            </div>
+            <div>
+              <label htmlFor="hour">시간:</label>
+              <input
+                value={
+                  disabledValue ? (inputValue / 60).toFixed(2) : inputValue
+                }
+                id="hour"
+                type="number"
+                placeholder="Hours"
+                onChange={onChange}
+                disabled={disabledValue}
+              />
+            </div>
+
+            <button onClick={onClickResetButton}>Reset</button>
+            <button onClick={onClickInvertButton}>
+              {disabledValue
+                ? '분으로 변환 모드로 변경'
+                : '시간으로 변환 모드로 변경'}
+            </button>
+          </div>
+        );
+      }
+      function App() {
+        return (
+          <div>
+            <h1>super Converter!</h1>
+            <MinutesToHoursConverter />
+            <KilloMeterToMileConverter />
+            <ExchangeRateConverter />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.querySelector('#root'));
+    </script>
+  </body>
+</html>
