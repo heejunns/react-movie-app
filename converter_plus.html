@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>단위변환(시간,거리,돈 등등) 앱</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script> -->
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      function App() {
+        const [inputValue, setinputValue] = React.useState('');
+        const [disabledValue, setDisabled] = React.useState(true);
+
+        const onChange = (event) => setinputValue(event.target.value);
+        const onClickResetButton = () => setinputValue('');
+        const onClickInvertButton = () => {
+          setDisabled((disabledValue) => !disabledValue);
+          onClickResetButton();
+        };
+
+        return (
+          <div>
+            <h1>super Converter!</h1>
+            <div>
+              <label htmlFor="minute">분 :</label>
+              <input
+                id="minute"
+                type="number"
+                placeholder="Minute"
+                value={disabledValue ? inputValue : inputValue * 60}
+                onChange={onChange}
+                disabled={!disabledValue}
+              />
+            </div>
+            <div>
+              <label htmlFor="hour">시간:</label>
+              <input
+                value={
+                  disabledValue ? (inputValue / 60).toFixed(2) : inputValue
+                }
+                id="hour"
+                type="number"
+                placeholder="Hours"
+                onChange={onChange}
+                disabled={disabledValue}
+              />
+            </div>
+            <button onClick={onClickResetButton}>Reset</button>
+            <button onClick={onClickInvertButton}>
+              {disabledValue
+                ? '분으로 변환 모드로 변경'
+                : '시간으로 변환 모드로 변경'}
+            </button>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.querySelector('#root'));
+    </script>
+  </body>
+</html>
